@@ -1,0 +1,7 @@
+# Geração de imagens na placa de vídeo NVIDIA (FLUX.2 [klein] 4B). Instale o PyTorch com CUDA
+# antes, pelo índice próprio dele (veja "Imagens na placa de vídeo" no README).
+diffusers>=0.41
+transformers>=5.19
+accelerate>=1.15
+safetensors>=0.8
+sentencepiece>=0.2

@@ -1,0 +1,8 @@
+requests>=2.32
+python-dotenv>=1.0
+google-genai>=2.29
+pillow>=11
+imageio-ffmpeg>=0.6
+google-api-python-client>=2.180
+google-auth-oauthlib>=1.2
+tzdata>=2025.1

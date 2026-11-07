@@ -1,0 +1,135 @@
+# Identidade do canal: estilo visual, voz e personagens que se repetem em todos os episódios.
+# Um universo próprio e reconhecível é o que separa o canal do conteúdo "genérico e feito em
+# série" que o YouTube não monetiza. Troque os exemplos abaixo pelos seus.
+
+[canal]
+nome = "TomandHolly"
+publico = "2 a 5 anos"
+# Estilo de todas as imagens. Em inglês, que o gerador de imagens entende melhor.
+estilo_visual = "2D children's cartoon illustration, soft rounded shapes, thick clean outlines, bright cheerful pastel colors, warm soft lighting, simple uncluttered background"
+# Fonte do texto na tela e da miniatura (opcional; padrão: Segoe UI Black ou Arial Black).
+# fonte = "C:/Windows/Fonts/seguibl.ttf"
+
+# Vozes do Gemini TTS. Algumas boas para criança: Sulafat (calorosa), Leda (jovem),
+# Achird (amigável), Vindemiatrix (suave), Puck (animada, masculina). Ouça todas em
+# aistudio.google.com > Generate speech antes de escolher.
+# Quando a cota gratuita de narração acaba, o episódio inteiro passa para a voz local (Kokoro,
+# roda no seu computador). motor = "local" usa sempre a voz local: a mesma voz em todos os
+# vídeos e nenhuma cota, mas menos expressiva. Vozes locais: af_heart, af_bella (inglês EUA),
+# bf_emma (inglês britânico), pf_dora (português).
+[narracao.pt]
+voz = "Sulafat"
+idioma = "pt-BR"
+estilo = "narradora calorosa e animada, sotaque brasileiro, fala devagar e com clareza para crianças pequenas"
+voz_local = "pf_dora"
+
+[narracao.en]
+voz = "Sulafat"
+idioma = "en-US"
+estilo = "warm, cheerful storyteller speaking slowly and clearly to toddlers"
+voz_local = "af_heart"
+motor = "local"   # a cota grátis de narração (~11 falas/dia) não cobre um episódio: voz local sempre, igual em todos os vídeos
+
+# Trilha de fundo. "ia": cada episódio ganha uma trilha original composta na sua placa de vídeo
+# (ACE-Step 1.5, uso comercial liberado), no estilo que as métricas mostram que segura melhor
+# a audiência. "biblioteca": usa as faixas baixadas em musica/.
+[musica]
+fonte = "ia"
+candidatos = 3   # versões geradas por episódio; o Gemini ouve todas e fica a melhor
+
+# O jeito das histórias. Todo roteiro (episódio e Short) segue o tom padrão: leve e bem-humorado,
+# com surpresas bobas, mal-entendidos gentis, sons engraçados e um bordão que se repete. Para
+# trocar, escreva o seu em tom = "...". Com contos = true, cada episódio novo parte de um conto
+# tradicional de domínio público (lista em estudio/contos.py: O Nabo Gigante, Os Músicos de
+# Bremen, fábulas de Esopo...), recontado com Lulu e Benny e com o ajuste para crianças pequenas.
+# Um tema seu (--tema) vale mais que o conto.
+[roteiro]
+contos = true
+
+# Produção automática: a tarefa diária do Windows escolhe o tema, escreve, produz, revisa, aprova
+# e agenda episódios até ter "manter_agendados" na fila. Com ligada = false, ela só envia o que
+# você produzir e aprovar.
+[automacao]
+ligada = true
+nicho = "animais"
+idioma = "en"
+minutos = 4
+manter_agendados = 3
+novos_por_execucao = 1
+# Produção contínua: o produtor (tarefa "Estudio - produtor", ao entrar no Windows) produz episódio
+# atrás de episódio, sem pausa, até cobrir os horários de [publicacao] até o fim desta semana +
+# semanas_adiantadas; aí para e volta sozinho quando a semana vira. A tarefa diária só envia.
+# Pausar: python -m estudio pausar.
+continua = true
+semanas_adiantadas = 1    # 1 = esta semana e a seguinte (folga se o computador ficar desligado)
+roteiros_adiantados = 2   # roteiros escritos à frente enquanto a placa trabalha no episódio atual
+espaco_minimo_gb = 20     # abaixo disso de espaço livre no disco, a produção espera e avisa
+
+# Como o canal se apresenta no YouTube (aplicado sozinho pela tarefa diária quando muda aqui).
+[youtube]
+feito_para_criancas = true   # audiência do canal: "conteúdo para crianças"
+idioma = "en"
+descricao = """Welcome to TomandHolly! Join Lulu, a curious little bunny, and Benny, a gentle turtle who loves to explain things, on cheerful adventures made for toddlers and preschoolers (ages 2-5).
+
+In every episode, little ones discover something new: farm animals and the real sounds they make, colors, numbers and kind everyday habits. Short, calm stories with friendly questions, pauses to answer and lots of happy repetition.
+
+New episodes every Tuesday, Thursday and Saturday. Made for kids: no scary moments, just gentle learning and fun."""
+palavras_chave = ["kids", "toddlers", "preschool", "kids cartoon", "animal sounds", "farm animals",
+                  "learning for kids", "educational videos for kids", "Lulu and Benny", "toddler learning"]
+# Hashtags da série: entram em todo vídeo, depois das do episódio (o YouTube ignora todas acima de 15).
+hashtags = ["#LuluAndBenny"]
+
+# Playlist de cada nicho: cada vídeo entra sozinho na playlist da sua série.
+[youtube.playlists]
+animais = "Animal Sounds with Lulu & Benny"
+
+# Shorts verticais (até ~40 s) tirados de cada episódio: um animal por Short, com imagens próprias
+# na vertical e, no fim, a chamada para o episódio completo (narrada, com a miniatura dele, e o
+# link na descrição). Cada Short só vai ao ar depois do episódio de onde saiu. O formato
+# (pergunta, curiosidade ou música) é escolhido pelo engajamento medido de cada um.
+# Para 2 por dia: 14 horários, max_por_semana = 14 e por_episodio = 5.
+[shorts]
+ligado = true
+horarios = ["seg 17:00", "ter 17:00", "qua 17:00", "qui 17:00", "sex 17:00", "sab 17:00", "dom 17:00"]
+max_por_semana = 7
+por_episodio = 3
+formatos = ["pergunta", "curiosidade", "musica"]
+segundos = 40
+playlist = "Lulu & Benny Shorts"
+
+# Quando os episódios aprovados vão ao ar. O comando "publicar" envia o vídeo na hora e o
+# YouTube o torna público no próximo horário livre. Um ritmo constante e sustentável é melhor
+# que rajadas: subir muitos vídeos parecidos de uma vez é o padrão de "conteúdo em série" que o
+# YouTube não monetiza.
+[publicacao]
+horarios = ["ter 10:00", "qui 10:00", "sab 09:00"]  # seg ter qua qui sex sab dom
+fuso = "America/Sao_Paulo"
+max_por_semana = 3
+categoria = 27              # 27 = Educação, 1 = Filmes e animação
+# Marcação de "conteúdo alterado ou sintético": obrigatória só quando o vídeo parece real.
+# Desenho animado claramente irreal não precisa.
+conteudo_sintetico = false
+# "automatica": depois de produzir, o episódio é revisado e aprovado sozinho se a revisão (regras +
+# Gemini) não tiver bloqueios; as métricas fazem o papel de revisão depois de publicado.
+# "humana": nada sobe sem o comando aprovar.
+aprovacao = "automatica"
+# Os aprovados só sobem quando o horário deles estiver a até tantos dias; o resto fica no estoque
+# local, que ainda pode ser ajustado (e é enviado conforme os horários chegam).
+antecedencia_dias = 14
+
+# Personagens fixos. A descricao_visual (em inglês) deve ser bem específica — cor, formato,
+# roupa — porque é ela que gera a imagem de referência usada em todas as cenas. Se não gostar
+# da imagem gerada em dados/personagens/, mude a "semente" e rode de novo.
+[[personagem]]
+id = "lulu"
+nomes = { pt = "Lulu", en = "Lulu" }
+descricao_visual = "a small round white bunny with big sparkly blue eyes, long floppy ears with pink insides, wearing a bright yellow scarf"
+personalidade = "curiosa e gentil, faz muitas perguntas"
+semente = 0
+
+[[personagem]]
+id = "bento"
+nomes = { pt = "Bento", en = "Benny" }
+descricao_visual = "a chubby little orange turtle with a green shell covered in round darker green spots, wearing small round black glasses"
+personalidade = "calmo e sabido, adora explicar as coisas devagar"
+semente = 0

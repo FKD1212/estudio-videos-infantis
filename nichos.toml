@@ -1,0 +1,42 @@
+# Nichos a comparar. Cada termo de busca custa 100 unidades de cota da YouTube API
+# (limite padrão: 10.000/dia). Esta configuração usa ~3.500 na primeira execução;
+# repetições no mesmo dia saem do cache e não gastam nada.
+
+[pesquisa]
+janela_dias = 365                    # só vídeos publicados neste período
+resultados_por_termo = 50            # 50 = 1 página de busca = 100 unidades
+duracao = "any"                      # any | short (<4 min) | medium (4-20 min) | long (>20 min)
+apenas_infantil = true               # descarta vídeos que o YouTube diz não serem "para crianças"
+canal_pequeno_max_inscritos = 100000 # abaixo disso o canal conta como "pequeno"
+outlier_minimo = 3.0                 # views >= 3x a mediana do canal = outlier
+videos_base_canal = 50               # quantos uploads recentes definem o "normal" do canal
+
+[[nicho]]
+nome = "historias"
+pt = ["historinha infantil animada", "história para dormir infantil"]
+en = ["bedtime stories for kids animated", "kids story cartoon"]
+
+[[nicho]]
+nome = "musicas"
+pt = ["música infantil animada", "cantigas de roda infantil"]
+en = ["nursery rhymes kids songs", "toddler songs"]
+
+[[nicho]]
+nome = "cores-numeros-letras"
+pt = ["aprender cores para crianças", "aprender números e letras infantil"]
+en = ["learn colors for toddlers", "learn numbers and abc for kids"]
+
+[[nicho]]
+nome = "animais"
+pt = ["animais para crianças sons", "fazendinha animais infantil"]
+en = ["animal sounds for kids", "farm animals for toddlers"]
+
+[[nicho]]
+nome = "veiculos"
+pt = ["caminhão desenho infantil", "carros e veículos para crianças"]
+en = ["trucks for kids cartoon", "vehicles for toddlers"]
+
+[[nicho]]
+nome = "boas-maneiras"
+pt = ["hábitos saudáveis infantil desenho", "boas maneiras para crianças"]
+en = ["good habits for kids cartoon", "manners for kids"]

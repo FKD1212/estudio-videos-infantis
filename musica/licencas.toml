@@ -1,0 +1,8 @@
+# Licença de cada faixa usada nos vídeos (caminho relativo a esta pasta). Um episódio cuja
+# música não está listada aqui não é aprovado: música sem licença clara gera reivindicação de
+# Content ID, e a receita do vídeo vai para o dono da música.
+#
+# Exemplo:
+# ["calma/Manha Tranquila.mp3"]
+# fonte = "YouTube Audio Library"
+# credito = ""   # texto de atribuição, se a licença exigir; vai para o fim da descrição
