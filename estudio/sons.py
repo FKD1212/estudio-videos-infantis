@@ -63,8 +63,9 @@ def buscar(animal: str, chave: str, sessao) -> list[dict]:
     termo = f"{animal} {VOCALIZACAO.get(animal, ('',))[0]}".strip()
     base = 'license:"Creative Commons 0" duration:[0.5 TO 30]'
     for filtro in (f"{base} tag:{animal.split()[-1]}", base):
-        resposta = sessao.get(API, timeout=30, params={
-            "query": termo, "token": chave, "page_size": CANDIDATOS * 2, "sort": "score",
+        # A chave vai no cabeçalho, não na URL: erros de conexão imprimem a URL inteira no log.
+        resposta = sessao.get(API, timeout=30, headers={"Authorization": f"Token {chave}"}, params={
+            "query": termo, "page_size": CANDIDATOS * 2, "sort": "score",
             "filter": filtro, "fields": "id,name,username,license,duration,previews,url"})
         resposta.raise_for_status()
         resultados = resposta.json().get("results", [])

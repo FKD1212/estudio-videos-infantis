@@ -37,7 +37,8 @@ class YouTube:
         if arquivo.exists() and time.time() - arquivo.stat().st_mtime < self.validade_s:
             return json.loads(arquivo.read_text(encoding="utf-8"))
 
-        resp = self.sessao.get(API + recurso, params={**params, "key": self.api_key}, timeout=30)
+        # A chave vai no cabeçalho, não na URL: erros de conexão imprimem a URL inteira no log.
+        resp = self.sessao.get(API + recurso, params=params, headers={"X-Goog-Api-Key": self.api_key}, timeout=30)
         if resp.status_code == 403 and "quotaExceeded" in resp.text:
             raise CotaEsgotada(
                 "Cota diária da YouTube API esgotada. Ela reinicia à meia-noite (horário do Pacífico); "
